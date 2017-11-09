@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         result=(EditText)findViewById(R.id.result);
         input=(EditText)findViewById((R.id.input));
         displayOperation =(TextView)findViewById((R.id.operation));
-
+        //some changes
 
 
         Button button1=(Button) findViewById((R.id.button1));
