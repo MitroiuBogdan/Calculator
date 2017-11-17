@@ -14,10 +14,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText result;
     private EditText input;
     private TextView displayOperation;
+    private TextView display;
 
-    private Double op1=null;
-    private Double op2=null;
-    private String pendingOperation="=";
+
+    private Double op1 = null;
+    private Double op2 = null;
+    private String pendingOperation = "=";
 
 
     @Override
@@ -25,46 +27,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        result=(EditText)findViewById(R.id.result);
-        input=(EditText)findViewById((R.id.input));
-        displayOperation =(TextView)findViewById((R.id.operation));
-        //some changes
+        result = (EditText) findViewById(R.id.result);
+        input = (EditText) findViewById((R.id.input));
+        displayOperation = (TextView) findViewById((R.id.operation));
+        display          =(TextView)  findViewById((R.id.textView));
 
 
-        Button button1=(Button) findViewById((R.id.button1));
-        Button button2=(Button) findViewById((R.id.button2));
-        Button button3=(Button) findViewById((R.id.button3));
-        Button button4=(Button) findViewById((R.id.button4));
-        Button button5=(Button) findViewById((R.id.button5));
-        Button button6=(Button) findViewById((R.id.button6));
-        Button button7=(Button) findViewById((R.id.button7));
-        Button button8=(Button) findViewById((R.id.button8));
-        Button button9=(Button) findViewById((R.id.button9));
-        Button button_plus=(Button) findViewById((R.id.button_plus));
-        Button button_minus=(Button) findViewById((R.id.button_minus));
-        Button button_mult=(Button) findViewById((R.id.button_multiply));
-        Button button_divide=(Button) findViewById((R.id.button_divide));
-        Button button_equal=(Button) findViewById((R.id.button_equal));
-        Button button_comma=(Button) findViewById((R.id.button_comma));
-        Button button_c=(Button) findViewById((R.id.button_c));
+        Button button1 = (Button) findViewById((R.id.button1));
+        Button button2 = (Button) findViewById((R.id.button2));
+        Button button3 = (Button) findViewById((R.id.button3));
+        Button button4 = (Button) findViewById((R.id.button4));
+        Button button5 = (Button) findViewById((R.id.button5));
+        Button button6 = (Button) findViewById((R.id.button6));
+        Button button7 = (Button) findViewById((R.id.button7));
+        Button button8 = (Button) findViewById((R.id.button8));
+        Button button9 = (Button) findViewById((R.id.button9));
+        Button button_plus = (Button) findViewById((R.id.button_plus));
+        Button button_minus = (Button) findViewById((R.id.button_minus));
+        Button button_mult = (Button) findViewById((R.id.button_multiply));
+        Button button_divide = (Button) findViewById((R.id.button_divide));
+        Button button_equal = (Button) findViewById((R.id.button_equal));
+        Button button_comma = (Button) findViewById((R.id.button_comma));
+        Button button_c = (Button) findViewById((R.id.button_c));
 
-      View.OnClickListener listener=new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-                Button b=(Button)view;
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button b = (Button) view;
                 input.append(b.getText().toString());
-                if(b.getText().toString().compareTo("=")==0){
-                      result.append(input.getText().toString());
-                      input.setText("");
-                }
-                if(b.getText().toString().compareTo("C")==0){
+                if(b.getText().toString().equals("C")){
+                    op1=null;
+                    op2=null;
                     input.setText("");
                     result.setText("");
-
+                    displayOperation.setText("");
                 }
+            }
+        };
 
-          }
-      };
 
         button1.setOnClickListener(listener);
         button2.setOnClickListener(listener);
@@ -77,13 +77,66 @@ public class MainActivity extends AppCompatActivity {
         button9.setOnClickListener(listener);
         button_c.setOnClickListener(listener);
         button_comma.setOnClickListener(listener);
-        button_divide.setOnClickListener(listener);
-        button_mult.setOnClickListener(listener);
-        button_minus.setOnClickListener(listener);
-        button_plus.setOnClickListener(listener);
-        button_equal.setOnClickListener(listener);
 
 
+        View.OnClickListener opListerner = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button b = (Button) view;
+                String op = b.getText().toString();
+                String value = input.getText().toString();
+                input.setText("");
+
+                if (value.length() != 0) {
+                    performOperation(value, op);
+                }
+                pendingOperation = op;
+                displayOperation.setText(pendingOperation);
+
+
+            }
+        };
+
+        button_divide.setOnClickListener(opListerner);
+        button_mult.setOnClickListener(opListerner);
+        button_minus.setOnClickListener(opListerner);
+        button_plus.setOnClickListener(opListerner);
+        button_equal.setOnClickListener(opListerner);
+    }
+
+    private void performOperation(String value, String op) {
+
+       if(op2==null){
+            op2=Double.parseDouble(value);
+            }
+
+       else {
+           if(pendingOperation.equals("=")){
+                pendingOperation=op;
+           }
+
+           op1=Double.parseDouble(value);
+           switch (pendingOperation) {
+               case "+":
+                    op2+=op1;
+                   break;
+               case "-":
+                    op2-=op1;
+                   break;
+               case "*":
+                    op2*=op1;
+                   break;
+               case "/":
+                    op2/=op1;
+                   break;
+               case "=":
+                  op2=op1;
+                   break;
+           }
+
+       }
+        result.setText(op2.toString());
+       input.setText("");
 
 
     }

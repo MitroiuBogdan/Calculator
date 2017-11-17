@@ -9,10 +9,11 @@
 
     <EditText
         android:id="@+id/input"
-        android:background="#FFFFE0"
         android:layout_width="254dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFE0"
         android:ems="10"
         android:inputType="numberSigned|numberDecimal"
         app:layout_constraintEnd_toEndOf="@+id/result"
@@ -20,16 +21,16 @@
 
     <EditText
         android:id="@+id/result"
-        android:layout_width="wrap_content"
+        android:layout_width="202dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="108dp"
         android:background="#FFFFE0"
         android:ems="10"
-        android:focusedByDefault="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:focusedByDefault="false"
         android:inputType="numberSigned|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.947"
@@ -43,7 +44,7 @@
         android:layout_marginEnd="8dp"
         android:background="#FFFFE0"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text=""
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/input"
@@ -219,4 +220,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/happy" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="181dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:text=""
+        android:background="	#F0F8FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.839"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
